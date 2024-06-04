@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Achieve MySkill Website', () => {
+describe('MySkill Website', () => {
     it('Should load the homepage',() =>{
         cy.visit('https://myskill.id/')
         cy.url()
