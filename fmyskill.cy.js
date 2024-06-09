@@ -4,30 +4,24 @@ describe('MySkill Website', () => {
     it('Should load the homepage',() =>{
         cy.visit('https://myskill.id/')
         cy.url()
-        cy.get('.MuiToolbar-root > .MuiContainer-root')
+        cy.get('.MuiToolbar-root');
     });
     it('Should navigate to the "E-Learning" page', () => {
-        cy.visit('https://myskill.id/'); // Ganti dengan URL halaman yang ingin diuji
-        cy.get('.MuiContainer-root > .MuiStack-root > [href="/e-learning"]').click().should('be.visible')
+        cy.visit('https://myskill.id/'); 
+        cy.get('.mui-style-mjdgbj').click().should('be.visible');
+        cy.wait(2000)
     });
     it('Should navigate to login page', () => {
-        // Kunjungi halaman utama
         cy.visit('https://myskill.id/e-learning');
-        
-        // Tunggu beberapa saat untuk memastikan halaman selesai dimuat
-        cy.wait(2000); // Tunggu 2 detik (sesuaikan jika perlu)
-    
-        // Periksa apakah elemen tombol ada dan terlihat
-        cy.get('.MuiButton-outlined', { timeout: 15000 }).eq(0).click();
-    
-        // Verifikasi URL mengandung '/auth/login?next=/'
+        cy.wait(2000);
+        cy.get('.MuiContainer-root > .MuiButton-outlined').click();
         cy.url({ timeout: 15000 }).should('include', '/auth/login?next=/e-learning');
+        cy.wait(2000)
     });
     it('Register successfully', () => {
         cy.visit('https://myskill.id/auth/login?next=/e-learning')
         cy.wait(2000);
-        cy.get('.mui-style-103o8ot > .MuiTypography-body2 > .MuiTypography-root', { timeout: 15000 })
-          .click();
+        cy.get('.mui-style-103o8ot > .MuiTypography-body2 > .MuiTypography-root', { timeout: 15000 }).click();
         cy.url().should('include', '/auth/register?next=/e-learning');
     }); 
 })
